@@ -39,6 +39,35 @@ cd simulation
 CLI: `--vx` (forward m/s) · `--vy` (left m/s) · `--vyaw` (yaw rad/s) · `--seconds`
 `--view` / `--headless` · `--snapshot` / `--depth-snapshot`.
 
+## ROS 2 node — publish velocities, the sim moves (`go2_ros_node.py`)
+
+A ROS 2 node wraps the sim:
+- **subscribes** `/cmd_vel` (`geometry_msgs/Twist`) → body velocity (`linear.x`, `linear.y`, `angular.z`)
+- **publishes** `/go2/odom` (`nav_msgs/Odometry`), `/go2/joint_states` (`sensor_msgs/JointState`),
+  `/go2/camera/image_raw` (`sensor_msgs/Image`, rgb8), `/go2/camera/depth` (`sensor_msgs/Image`, 32FC1)
+
+Needs ROS 2 (tested on **Jazzy**) plus the pip deps. Make the venv ROS-aware with
+`--system-site-packages` so it sees the system `rclpy`:
+
+```bash
+cd simulation
+source /opt/ros/jazzy/setup.bash                       # your distro
+uv venv rosenv --system-site-packages --python 3.12
+uv pip install --python rosenv/bin/python -r requirements.txt
+
+# terminal A — run the sim node (add --view for the MuJoCo window):
+source /opt/ros/jazzy/setup.bash
+./rosenv/bin/python go2_ros_node.py
+
+# terminal B — just publish velocities:
+source /opt/ros/jazzy/setup.bash
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist \
+    "{linear: {x: 0.3, y: 0.0}, angular: {z: 0.4}}" -r 10
+ros2 topic echo /go2/odom            # watch it move
+```
+
+`go2_ros_node.py` flags: `--view`, `--no-camera`, `--seconds N` (auto-stop).
+
 ## Use as a library
 
 ```python
