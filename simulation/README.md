@@ -10,6 +10,31 @@ The official Go2 + RealSense models are pulled automatically via `robot_descript
 the head + a forward-looking `head_cam`). `mujoco` only does physics; `go2_velocity.py`
 is the controller.
 
+## Quickstart (TL;DR)
+
+**A) See the simulation move** (standalone, opens the MuJoCo window):
+```bash
+cd simulation
+uv venv mjenv --python 3.12 && uv pip install --python mjenv/bin/python -r requirements.txt
+./mjenv/bin/python go2_velocity.py --vx 0.3 --vyaw 0.4 --view
+```
+
+**B) Drive it by publishing velocities over ROS 2** (watch the window with `--view`):
+```bash
+cd simulation
+source /opt/ros/jazzy/setup.bash
+uv venv rosenv --system-site-packages --python 3.12
+uv pip install --python rosenv/bin/python -r requirements.txt
+
+# terminal A — sim node + MuJoCo window:
+source /opt/ros/jazzy/setup.bash && ./rosenv/bin/python go2_ros_node.py --view
+
+# terminal B — publish velocities, the dog moves:
+source /opt/ros/jazzy/setup.bash
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.3}, angular: {z: 0.4}}" -r 10
+```
+Details below.
+
 ## Setup (one-time)
 
 Uses [`uv`](https://docs.astral.sh/uv/) for a clean, isolated env (no system Python
