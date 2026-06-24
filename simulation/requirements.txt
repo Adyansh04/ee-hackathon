@@ -1,0 +1,5 @@
+# Pure-MuJoCo Go2 velocity sim (no RL/DDS/ROS). Python 3.12.
+mujoco>=3.10
+numpy>=2.0
+robot_descriptions>=1.12   # pulls the official MuJoCo Menagerie Go2 + RealSense D435i
+pillow>=10.0               # for --snapshot / --depth-snapshot
