@@ -1,0 +1,16 @@
+{
+  "appId": "dimos-go2-tester",
+  "version": "0.1.0",
+  "platform": "linux/arm64",
+  "services": {
+    "dimos": {
+      "context": "./dimos",
+      "entitlements": [
+        { "type": "network", "mode": "host" },
+        { "type": "gpu" },
+        { "type": "bluetooth" },
+        { "type": "persist", "name": "dimos-data", "path": "/data/dimos" }
+      ]
+    }
+  }
+}

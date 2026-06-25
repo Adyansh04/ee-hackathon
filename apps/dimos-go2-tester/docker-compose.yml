@@ -1,0 +1,29 @@
+services:
+  dimos:
+    build:
+      context: ./dimos
+      dockerfile: Dockerfile
+    restart: "no"
+    network_mode: host
+    environment:
+      - ROBOT_IP
+      - ROBOT_IP_CANDIDATES
+      - DIMOS_MODE
+      - DIMOS_BLUEPRINT
+      - DIMOS_EXTRA_ARGS
+      - DIMOS_VIEWER
+      - VIEWER
+      - DIMOS_LISTEN_HOST
+      - LISTEN_HOST
+      - DIMOS_MCP_PORT
+      - MCP_PORT
+      - DIMOS_N_WORKERS
+      - N_WORKERS
+      - UNITREE_AES_128_KEY
+      - GO2_AES_128_KEY
+      - UNITREE_AES_KEY_FILE
+      - OPENAI_API_KEY
+      - OLLAMA_HOST
+      - WIFI_SSID
+      - WIFI_PASSWORD
+      - WENDY_RUNTIME_ENV_FILE

@@ -1,0 +1,40 @@
+services:
+  dimos:
+    build:
+      context: .
+      dockerfile: local/Dockerfile
+    image: ee-hackathon/dimos-go2-tester:latest
+    network_mode: host
+    runtime: ${DOCKER_RUNTIME:-nvidia}
+    ipc: host
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    environment:
+      ROBOT_IP: ${ROBOT_IP:-}
+      DIMOS_MODE: ${DIMOS_MODE:-basic}
+      DIMOS_BLUEPRINT: ${DIMOS_BLUEPRINT:-}
+      DIMOS_EXTRA_ARGS: ${DIMOS_EXTRA_ARGS:-}
+      VIEWER: ${VIEWER:-rerun-web}
+      LISTEN_HOST: ${LISTEN_HOST:-0.0.0.0}
+      UNITREE_AES_128_KEY: ${UNITREE_AES_128_KEY:-}
+      GO2_AES_128_KEY: ${GO2_AES_128_KEY:-}
+      UNITREE_AES_KEY_FILE: ${UNITREE_AES_KEY_FILE:-/data/dimos/unitree_aes_key}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://127.0.0.1:11434}
+      WIFI_SSID: ${WIFI_SSID:-}
+      WIFI_PASSWORD: ${WIFI_PASSWORD:-}
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
+    volumes:
+      - dimos_data:/data/dimos
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/app/healthcheck.sh"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 30s
+
+volumes:
+  dimos_data:

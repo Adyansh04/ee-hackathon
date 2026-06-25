@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "wendy",
+            "name": "Debug Python App with Wendy",
+            "request": "attach",
+            "target": "/home/adyansh/ee-hackathon",
+            "cwd": "/home/adyansh/ee-hackathon",
+            "preLaunchTask": "wendy: Run Python App"
+        }
+    ]
+}

@@ -144,3 +144,13 @@ Demo story:
 5. If uncertain, it says: "Reading uncertain; retaking image from closer distance."
 
 This directly addresses useful, robust, low-petting, trainable, and wanted.
+
+## Architecture Notes Added Later
+
+- [WendyOS Deployment Notes](./wendyos-deployment.md) - containerization, `wendy run`, entitlements, app groups, and ROS2 compose tradeoffs.
+- [Wendy Go2 Template Architecture](./wendy-go2-template-architecture.md) - `go2-initial-test`, `go2-rc`, and `go2-foxglove` service patterns.
+- [Go2-Inspector Evaluation](./go2-inspector-evaluation.md) - feasibility and reuse plan for `amberhandal/Go2-Inspector`.
+- [Go2-Inspector Report and SAM3 Data Flow](./go2-inspector-report-and-sam3.md) - exact JSON log shape, SAM3 request/response assumptions, change reports, and export bundle.
+- [Dimos on WendyOS Integration Notes](./dimos-wendy-integration.md) - how much Dimos should own and how to constrain it safely.
+- [DimOS Real Robot Test Plan](./dimos-real-robot-test-plan.md) - feature matrix and safe test order for the containerized DimOS Go2 app.
+- [Proposed Hackathon Architecture and Feasibility](./proposed-architecture-feasibility.md) - evaluation of the frontier-exploration/semantic-map/Dimos plan.
